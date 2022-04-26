@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}My Photos{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="mt-5 mb-5">
+            <div class="row">
+                {% for photo in myPhotos %}
+                    <div class="col-sm-12 col-lg-4 mb-3 ">
+                        <div class="card-deck">
+                            <div class="card d-flex justify-content-between">
+                                <div class="imageGallery1 bg-image hover-zoom">
+                                    <a href="/images/hosting/{{ photo.filename }}"><img src="/images/hosting/{{ photo.filename }}" class="card-img-top shadow" alt=""></a>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Wysłano: {{ photo.uploadedAt|date('d.m.Y') }}</small>
+                                    <small class="text-muted">Dodał: {{ photo.user.username }}</small>
+                                    <p>
+                                        {% if photo.user == app.user %}
+                                            <a href="{{ path('my_photos_remove', {'id': photo.id}) }}" class="badge btn-danger text-decoration-none text-light">Delete</a>
+                                            {% if photo.isPublic == '1' %}
+                                                <a href="{{ path('my_photos_set_visibility', {'id': photo.id, 'visibility': '0'}) }}" class="badge btn-primary text-decoration-none text-light">Private</a>
+                                            {% else %}
+                                                <a href="{{ path('my_photos_set_visibility', {'id': photo.id, 'visibility': '1'}) }}" class="badge btn-success text-decoration-none text-light">Public</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

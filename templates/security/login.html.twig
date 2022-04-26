@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post">
+    <section class="vh-100 bg-image" style="background-image:  url('{{ asset('assets/images/img4.webp') }}');">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
+
+                                {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
+
+
+                                <h3 class="mb-5 text-uppercase">Sign in</h3>
+
+                                <div class="form-outline mb-4 w-75 me-auto ms-auto">
+
+                                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control form-control-lg bg-dark" autocomplete="username" required autofocus />
+
+                                    <label class="form-label text-light" for="inputUsername">Username</label>
+                                </div>
+
+
+
+                                <div class="form-outline mb-4 w-75 me-auto ms-auto ">
+                                    <input type="password" name="password" id="typePasswordX-2" class="form-control form-control-lg bg-dark " autocomplete="current-password" required />
+                                    <label class="form-label text-light" for="typePasswordX-2">Password</label>
+                                </div>
+
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}"
+                                >
+
+                                <!-- Checkbox -->
+                                <div class="form-check d-flex justify-content-start mb-4 w-75 me-auto ms-auto">
+                                    <label>
+                                        <input type="checkbox" name="_remember_me" class="form-check-input"> Remember me
+                                    </label>
+                                </div>
+
+                                <button class="btn btn-primary btn-group-lg w-50 gradient-custom-4 rounded-9" type="submit">Login</button>
+
+                                <p class="text-center text-muted mt-4 mb-0">Don't have an account? <a href="{{ path('app_register') }}" class="fw-bold"><u class="text-decoration-none">Register</u></a></p>
+
+                                <hr class="my-4">
+
+                                <button class="disabled btn btn-group-lg btn-primary col-sm-9 rounded-9 mb-3" style="background-color: #dd4b39;" type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
+                                <button class="disabled btn btn-group-lg btn-primary col-sm-9 rounded-9" style="background-color: #3b5998;" type="submit"><i class="fab fa-facebook-f me-2"></i>Sign in with facebook</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+
+
+{#</div>#}
+{% endblock %}
