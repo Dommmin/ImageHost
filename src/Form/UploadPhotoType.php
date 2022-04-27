@@ -5,20 +5,20 @@ namespace App\Form;
 use App\Entity\Photo;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class UploadPhotoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('filename', FileType::class, [
-                'label' => ' ',
+            ->add('filename', DropzoneType::class, [
+                'label' => false,
                 'attr' => [
-                    'class' => 'visually-hidden',
+                    'data-controller' => 'mydropzone',
                 ],
                 'constraints' => [
                     new File([
@@ -26,7 +26,7 @@ class UploadPhotoType extends AbstractType
                         'mimeTypes' => [
                             'image/*'
                         ],
-                        'mimeTypesMessage' => 'You must select Image!'
+                        'mimeTypesMessage' => 'You must select Image!',
                     ])
                 ]
             ])

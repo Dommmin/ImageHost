@@ -12,20 +12,27 @@
                 </div>
 
             {% if app.user %}
+
+
                     <label class="container w-50 d-block ms-auto me-auto" style="cursor: pointer;">
-                        <div class="text-center">
+                        <div class="text-center"
+                            {{ stimulus_controller('mydropzone') }}
+                                data-controller="mydropzone"
+                        >
 
                             <i class="fas fa-cloud-upload-alt fa-8x text-info text-opacity-75"></i>
                             <h1 class="text-center mt-2 mb-2 h4 fw-bold">
-                                Drag and drop or click here
+                                Drag and drop under or click here
                             </h1>
                             <h6>( Maximum file size: 2M )</h6>
                         </div>
 
 
-
                         {{ form_start(form) }}
-                        {{ form_row(form.filename) }}
+                        <div class="text-center">
+                            {{ form_row(form.filename) }}
+                        </div>
+
 
                         <div class="form-check d-flex justify-content-center mb-3 fw-bold">
                                 {{ form_row(form.is_public) }}
@@ -35,7 +42,11 @@
                             <input type="submit" value="Send" class="btn btn-success btn-lg gradient-custom-3 rounded-9 text-center w-25" />
                             {{ form_end(form) }}
                         </div>
+
+
                     </label>
+
+
             {% else %}
                 <div class="col-7 card mb-5 bg-danger bg-opacity-25 me-auto ms-auto">
                     <div class="pt-3 pb-2  text-center">
