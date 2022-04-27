@@ -3,7 +3,7 @@
 1. Run 'composer install'
 2. Run 'yarn install' then 'yarn watch'
 
-3. Database
+3. Database - configure connection in '.env' file
    - 'php bin/console do:da:cre' - create database
    - 'php bin/console do:mig:mig' - make migration
    - 'php bin/console do:fi:lo' - load fixtures
